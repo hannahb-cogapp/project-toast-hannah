@@ -12,6 +12,10 @@ function ToastPlayground() {
   const [variantSelected, setVariantSelected] = React.useState(VARIANT_OPTIONS[0]);
   const [showToast, setShowToast] = React.useState(false);
 
+  function handleDismiss() {
+    setShowToast(false);
+  }
+
   return (
     <div className={styles.wrapper}>
       <header>
@@ -19,7 +23,11 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
       { showToast &&
-        <Toast message={message} variant={variantSelected} setShowToast={setShowToast}/>
+        <Toast 
+          variant={variantSelected} 
+          handleDismiss={handleDismiss}>
+          {message}
+        </Toast>
       }
 
       <div className={styles.controlsWrapper}>
@@ -67,8 +75,6 @@ function ToastPlayground() {
                 </label>
               )
           })}
-
-            {/* TODO Other Variant radio buttons here */}
           </div>
         </div>
 
@@ -82,7 +88,7 @@ function ToastPlayground() {
                 setShowToast(true);
               }}
             >
-                  Pop Toast!
+              Pop Toast!
             </Button>
           </div>
         </div>
